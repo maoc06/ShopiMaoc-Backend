@@ -26,7 +26,7 @@ class ProductRepositoryTest {
 	
 	private final static Logger log = LoggerFactory.getLogger(ProductRepositoryTest.class);
 	
-	private final static String proId = "HUA28";
+	private final static String proId = "HUA27";
 	
 	@Autowired
 	ProductRepository productRepository;
