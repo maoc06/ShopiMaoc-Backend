@@ -50,6 +50,14 @@ public class PaymentMethodServiceImpl implements PaymentMethodService{
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public PaymentMethod update(PaymentMethod entity) throws Exception {
 		
+		if(entity == null) {
+			throw new Exception("El PaymentMethod es nulo");
+		}
+		
+		if(entity.getPayId()==null) {
+			throw new Exception("El payId es Obligatorio");
+		}
+		
 		validate(entity);
 		
 		if(!paymentMethodRepository.existsById(entity.getPayId())) {
