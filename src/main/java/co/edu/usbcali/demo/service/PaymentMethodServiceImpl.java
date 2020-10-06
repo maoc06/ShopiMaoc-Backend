@@ -100,7 +100,9 @@ public class PaymentMethodServiceImpl implements PaymentMethodService{
 		
 		if(paymentMethodRepository.existsById(id)) {
 			delete(paymentMethodRepository.findById(id).get());
-		}
+		} else {
+			throw new Exception("El paymentMethod con id:"+id+" No existe");
+		}	
 	}
 
 	@Override

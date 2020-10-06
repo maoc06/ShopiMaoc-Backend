@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -22,10 +25,18 @@ import javax.persistence.Table;
 public class PaymentMethod implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	/*@NotNull
+	@Positive*/
 	private Integer payId;
 	
+	@NotNull
+	@Size(min = 1, max = 1)
+	@NotEmpty
 	private String enable;
 	
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
 	private String name;
 	private List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>(0);
 
