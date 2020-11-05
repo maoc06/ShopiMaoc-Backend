@@ -38,16 +38,23 @@ public class PaymentMethod implements java.io.Serializable {
 	@Size(min = 1, max = 255)
 	@NotEmpty
 	private String name;
+	
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
+	private String image;
+	
 	private List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>(0);
 
 	public PaymentMethod() {
 	}
 
-	public PaymentMethod(Integer payId, String enable, String name, List<ShoppingCart> shoppingCarts) {
+	public PaymentMethod(Integer payId, String enable, String name, String image, List<ShoppingCart> shoppingCarts) {
 		this.payId = payId;
 		this.enable = enable;
 		this.name = name;
 		this.shoppingCarts = shoppingCarts;
+		this.image = image;
 	}
 
 	@Id
@@ -77,6 +84,15 @@ public class PaymentMethod implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Column(name = "image", nullable = false)
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paymentMethod")

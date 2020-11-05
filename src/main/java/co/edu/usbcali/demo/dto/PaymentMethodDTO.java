@@ -18,16 +18,22 @@ public class PaymentMethodDTO {
 	@Size(min = 1, max = 255)
 	@NotEmpty
 	private String name;
+	
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
+	private String image;
 
 	public PaymentMethodDTO() {
 		super();
 	}
 
-	public PaymentMethodDTO(Integer payId,String enable, String name) {
+	public PaymentMethodDTO(Integer payId,String enable, String name, String image) {
 		super();
 		this.payId = payId;
 		this.enable = enable;
 		this.name = name;
+		this.image = image;
 	}
 
 	public Integer getPayId() {
@@ -52,5 +58,13 @@ public class PaymentMethodDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+	
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
