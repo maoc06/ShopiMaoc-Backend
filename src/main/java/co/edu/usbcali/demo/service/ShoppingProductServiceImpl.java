@@ -113,4 +113,10 @@ public class ShoppingProductServiceImpl implements ShoppingProductService{
 			throw new Exception("El total es obligatorio");
 		}	
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Long totalShoppingProductByShoppingCart(Integer carId){
+		return shoppingProductRepository.totalShoppingProductByShoppingCart(carId);
+	}
 }

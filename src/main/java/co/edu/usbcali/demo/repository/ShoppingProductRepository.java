@@ -14,5 +14,8 @@ public interface ShoppingProductRepository extends JpaRepository<ShoppingProduct
 	
 	@Query("SELECT shpr FROM ShoppingProduct shpr WHERE shpr.shoppingCart.carId = ?1 AND shpr.product.proId = ?2")
 	public List<ShoppingProduct> findByProId(Integer carId, String proId);
+	
+	@Query("SELECT SUM(shpr.total) FROM ShoppingProduct shpr WHERE shpr.shoppingCart.carId=:carId")
+	public Long totalShoppingProductByShoppingCart(Integer carId);
 
 }

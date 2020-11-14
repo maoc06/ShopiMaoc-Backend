@@ -44,6 +44,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Customer> findByQuery(String query) {
+		return customerRepository.findByQuery(query);
+	}
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

@@ -41,8 +41,26 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	@Transactional(readOnly = true)
+	public List<Product> findByEnableTrue() {
+		return productRepository.findByEnableTrue();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public Optional<Product> findById(String id) throws Exception {
 		return productRepository.findById(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Product> findByQuery(String query) throws Exception {
+		return productRepository.findByQuery(query);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Product> findByMaxPrice(Integer maxPrice) throws Exception {
+		return productRepository.findByPriceLessThan(maxPrice);
 	}
 
 	@Override

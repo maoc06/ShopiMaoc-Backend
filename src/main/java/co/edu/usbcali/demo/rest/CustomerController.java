@@ -71,6 +71,14 @@ public class CustomerController {
 		return ResponseEntity.ok().body(customerDTOs);
 	}
 	
+	@GetMapping("/search/{query}")
+	public ResponseEntity<?> findByQuery(@PathVariable("query") String query) throws Exception {
+		List<Customer> customers = customerService.findByQuery(query);
+		List<CustomerDTO> customerDTOs = customerMapper.toCustomersDTO(customers);
+		
+		return ResponseEntity.ok().body(customerDTOs);
+	}
+	
 	
 	@GetMapping("/findById/{email}")
 	public ResponseEntity<?> findById(@PathVariable("email") String email) throws Exception {

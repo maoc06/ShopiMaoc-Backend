@@ -70,6 +70,14 @@ public class ProductController {
 
 		return ResponseEntity.ok().body(productDTOs);
 	}
+	
+	@GetMapping("/findByEnableTrue")
+	public ResponseEntity<?> findAllForCustomer() throws Exception {
+		List<Product> products = productService.findByEnableTrue();
+		List<ProductDTO> productDTOs = productMapper.toProductDTO(products);
+
+		return ResponseEntity.ok().body(productDTOs);
+	}
 
 	@GetMapping("/findById/{proId}")
 	public ResponseEntity<?> findById(@PathVariable("proId") String proId) throws Exception {
@@ -84,6 +92,22 @@ public class ProductController {
 		ProductDTO productDTO = productMapper.toProductDTO(product);
 
 		return ResponseEntity.ok().body(productDTO);
+	}
+	
+	@GetMapping("/search/{query}")
+	public ResponseEntity<?> findByQuery(@PathVariable("query") String query) throws Exception {
+		List<Product> products = productService.findByQuery(query);
+		List<ProductDTO> productDTOs = productMapper.toProductDTO(products);
+
+		return ResponseEntity.ok().body(productDTOs);
+	}
+	
+	@GetMapping("/maxPrice/{price}")
+	public ResponseEntity<?> findByMaxPrice(@PathVariable("price") Integer price) throws Exception {
+		List<Product> products = productService.findByMaxPrice(price);
+		List<ProductDTO> productDTOs = productMapper.toProductDTO(products);
+		
+		return ResponseEntity.ok().body(productDTOs);
 	}
 
 }

@@ -37,11 +37,16 @@ public class CustomerDTO {
 	@NotEmpty
 	private String token;
 	
+	@NotNull
+	@Size(min = 1, max = 1)
+	@NotEmpty
+	private String rol;
+	
 	public CustomerDTO() {
 		super();
 	}
 
-	public CustomerDTO(String email, String address, String enable, String name, String phone, String token) {
+	public CustomerDTO(String email, String address, String enable, String name, String phone, String token,String rol) {
 		super();
 		this.email = email;
 		this.address = address;
@@ -49,6 +54,15 @@ public class CustomerDTO {
 		this.name = name;
 		this.phone = phone;
 		this.token = token;
+		this.rol = rol;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	public String getEmail() {

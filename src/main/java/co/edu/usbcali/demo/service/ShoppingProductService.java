@@ -9,5 +9,7 @@ public interface ShoppingProductService extends GenericService<ShoppingProduct, 
 	List<ShoppingProduct> findByCarId(Integer carId) throws Exception;
 
 	List<ShoppingProduct> findByProId(Integer carId, String proId) throws Exception;
+	
+	Long totalShoppingProductByShoppingCart(Integer carId) throws Exception;
 
 }

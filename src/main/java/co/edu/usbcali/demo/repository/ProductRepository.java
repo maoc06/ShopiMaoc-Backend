@@ -21,4 +21,10 @@ public interface ProductRepository extends JpaRepository<Product, String>{
 	
 	@Query("SELECT pro FROM Product pro WHERE pro.name LIKE 'iP%' AND pro.enable='Y'")
 	public List<Product> findiPhoneAndEnable();
+	
+	@Query("SELECT pro FROM Product pro WHERE pro.name LIKE %?1%")
+	public List<Product> findByQuery(String query);
+	
+	//@Query("SELECT pro FROM Product pro WHERE pro.name LIKE %?1%")
+	public List<Product> findByPriceLessThan(Integer maxPrice);
 }

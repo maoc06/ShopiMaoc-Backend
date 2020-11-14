@@ -58,12 +58,22 @@ public class PaymentMethodController {
 		
 		paymentMethodService.deleteById(payId);
 		
-		return ResponseEntity.ok("Se elimino el paymentMethod con payId = " + payId);
+		// PlainResponse plainResponse = new PlainResponse("Se elimino el paymentMethod con payId = " + payId);
+				
+		return ResponseEntity.ok().build();
 	}
 	
 	@GetMapping("/findAll")
 	public ResponseEntity<?> findAll() throws Exception {
 		List<PaymentMethod> paymentMethod = paymentMethodService.findAll();
+		List<PaymentMethodDTO> paymentMethodDTO = paymentMethodMapper.toPaymentMethodsDTO(paymentMethod);
+		
+		return ResponseEntity.ok().body(paymentMethodDTO);
+	}
+	
+	@GetMapping("/findByEnableTrue")
+	public ResponseEntity<?> findByEnableTrue() throws Exception {
+		List<PaymentMethod> paymentMethod = paymentMethodService.findByEnableTrue();
 		List<PaymentMethodDTO> paymentMethodDTO = paymentMethodMapper.toPaymentMethodsDTO(paymentMethod);
 		
 		return ResponseEntity.ok().body(paymentMethodDTO);

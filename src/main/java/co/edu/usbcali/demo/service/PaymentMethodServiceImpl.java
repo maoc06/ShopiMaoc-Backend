@@ -27,6 +27,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService{
 	
 	@Override
 	@Transactional(readOnly = true)
+	public List<PaymentMethod> findByEnableTrue() {
+		return paymentMethodRepository.findByEnableTrue();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public Optional<PaymentMethod> findById(Integer id) throws Exception {
 		return paymentMethodRepository.findById(id);
 	}
