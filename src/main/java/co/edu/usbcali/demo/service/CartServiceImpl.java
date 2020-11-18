@@ -47,11 +47,10 @@ public class CartServiceImpl implements CartService{
 		customer = customerOptional.get();
 		
 		if(customer.getEnable()==null || customer.getEnable().equals("N")) {
-			throw new Exception("El cliente con email: "+email+ " no esta hbilitado");
+			throw new Exception("El cliente con email: "+email+ " no esta habilitado");
 		}
 		
 		ShoppingCart shoppingCart = new ShoppingCart(0, customer, 0, null, null, "Y", 0L);
-		// ShoppingCart shoppingCart=new ShoppingCart(0, customer, null,0, 0L, "Y", null);
 
 		
 		shoppingCart = shoppingCartService.save(shoppingCart);
@@ -120,6 +119,7 @@ public class CartServiceImpl implements CartService{
 		totalCart = shoppingProductService.totalShoppingProductByShoppingCart(carId);
 		
 		shoppingCart.setTotal(totalCart);
+		shoppingCart.setItems(shoppingCart.getItems() + quantity);
 		shoppingCartService.update(shoppingCart);
 		
 		return shoppingProduct;
@@ -127,7 +127,7 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void removeProduct(Integer carId, String proId) throws Exception {
+	public void removeProduct(Integer carId, String proId, Integer quantity) throws Exception {
 		
 		ShoppingCart shoppingCart = null;
 		Product product = null;
@@ -138,6 +138,9 @@ public class CartServiceImpl implements CartService{
 		}
 		if(proId == null || proId.isBlank()) {
 			throw new Exception("el proId es nulo o vacio");
+		}
+		if(quantity == null || quantity < 0) {
+			throw new Exception("La cantidad es nulo o menor a cero");
 		}
 		
 		if(shoppingCartService.findById(carId).isPresent() == false) {
@@ -161,15 +164,19 @@ public class CartServiceImpl implements CartService{
 		
 		shoppingProduct = shoppingProductService.findByProId(carId, proId).get(0);
 		
-		if(shoppingProduct.getQuantity() > 1) {
-			shoppingProduct.setQuantity(shoppingProduct.getQuantity() - 1);
-			shoppingProduct.setTotal(shoppingProduct.getTotal() - product.getPrice());
-			shoppingProductService.update(shoppingProduct);
-		} else {
+		if(shoppingProduct.getQuantity() == quantity || shoppingProduct.getQuantity() == 1) {
 			shoppingProductService.deleteById(shoppingProduct.getShprId());
+		} else {
+			Long totalShpr = shoppingProduct.getTotal() - (product.getPrice() * quantity);
+			
+			shoppingProduct.setQuantity(shoppingProduct.getQuantity() - quantity);
+			shoppingProduct.setTotal(totalShpr);
+			shoppingProductService.update(shoppingProduct);
 		}
 		
-		shoppingCart.setTotal(shoppingCart.getTotal() - product.getPrice());
+		Long totalCart = shoppingCart.getTotal() - (product.getPrice() * quantity);
+		
+		shoppingCart.setTotal(totalCart);
 		shoppingCart.setItems(shoppingCart.getItems() - 1);
 		shoppingCartService.update(shoppingCart);
 		
@@ -214,6 +221,16 @@ public class CartServiceImpl implements CartService{
 	@Transactional(readOnly = true)
 	public List<ShoppingProduct> findShoppingProductByShoppingCart(Integer carId) throws Exception {
 		return shoppingProductService.findByCarId(carId);
+	}
+
+	@Override
+	public List<ShoppingCart> findByCustomerShops(String email) throws Exception {
+		return shoppingCartService.findByCustomerShops(email);
+	}
+
+	@Override
+	public Optional<ShoppingCart> findByCustomerEnableTrue(String email) throws Exception {
+		return shoppingCartService.findByCustomerEnableTrue(email);
 	}
 
 }

@@ -1,14 +1,10 @@
 package co.edu.usbcali.demo.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-
-import co.edu.usbcali.demo.domain.ShoppingProduct;
 
 public class ShoppingCartDTO {
 	

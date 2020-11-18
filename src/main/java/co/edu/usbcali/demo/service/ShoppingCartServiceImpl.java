@@ -33,6 +33,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	
 	@Override
 	@Transactional(readOnly = true)
+	public Optional<ShoppingCart> findByCustomerEnableTrue(String email) throws Exception {
+		return shoppingCartRepository.findByCustomerEnableTrue(email);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<ShoppingCart> findByCustomerShops(String email) throws Exception {
+		return shoppingCartRepository.findByCustomerShops(email);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public Long count() {
 		return shoppingCartRepository.count();
 	}

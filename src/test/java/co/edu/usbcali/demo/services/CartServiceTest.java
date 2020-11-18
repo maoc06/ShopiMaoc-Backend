@@ -61,10 +61,11 @@ class CartServiceTest {
 	void debeBorrarProductShoppingCart() throws Exception {
 		// Arrange
 		Integer carId = 3;
-		String proId = "XI-REN8";
+		String proId = "APPL-WCH-9";
+		Integer quantity = 1;
 		
 		// Act
-		cartService.removeProduct(carId, proId);		
+		cartService.removeProduct(carId, proId, quantity);		
 	}
 	
 	@Test
@@ -72,9 +73,10 @@ class CartServiceTest {
 		// Arrange
 		Integer carId = 99;
 		String proId = "XI-REN8";
+		Integer quantity = 1;
 		
 		// Act
-		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId));	
+		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId, quantity));	
 	}
 	
 	@Test
@@ -82,9 +84,10 @@ class CartServiceTest {
 		// Arrange
 		Integer carId = 9;
 		String proId = "XI-REN8";
+		Integer quantity = 1;
 		
 		// Act
-		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId));	
+		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId, quantity));	
 	}
 	
 	@Test
@@ -92,9 +95,10 @@ class CartServiceTest {
 		// Arrange
 		Integer carId = 9;
 		String proId = "XI-RN9";
+		Integer quantity = 1;
 		
 		// Act
-		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId));	
+		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId, quantity));	
 	}
 	
 	@Test
@@ -102,9 +106,10 @@ class CartServiceTest {
 		// Arrange
 		Integer carId = 9;
 		String proId = "NN";
+		Integer quantity = 1;
 		
 		// Act
-		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId));	
+		assertThrows(Exception.class, ()->cartService.removeProduct(carId, proId, quantity));	
 	}
 	
 	@Test
