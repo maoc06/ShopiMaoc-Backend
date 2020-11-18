@@ -56,6 +56,14 @@ public class ShoppingCartDTO {
 	@NotEmpty
 	private String enable;
 	
+	//@NotNull
+	@Size(min = 5, max = 255)
+	//@NotEmpty
+	private String address;
+
+	//@Size(min = 5, max = 255)
+	private String date;
+	
 
 	public ShoppingCartDTO() {
 		super();
@@ -66,7 +74,7 @@ public class ShoppingCartDTO {
 			/*String cusName, String cusPhone,
 			String cusAddress,*/ Integer payId,
 			/*String payName,*/ Integer items,
-			Long total, String enable
+			Long total, String enable, String address, String date
 			) {
 		super();
 		this.carId = carId;
@@ -79,6 +87,8 @@ public class ShoppingCartDTO {
 		this.items = items;
 		this.total = total;
 		this.enable = enable;
+		this.address = address;
+		this.date = date;
 		//this.shoppingProducts = shoppingProducts;
 	}
 	
@@ -168,5 +178,23 @@ public class ShoppingCartDTO {
 
 	public void setEnable(String enable) {
 		this.enable = enable;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}	
+	
+	
 }

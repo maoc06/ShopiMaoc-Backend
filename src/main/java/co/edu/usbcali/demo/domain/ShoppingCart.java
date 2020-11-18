@@ -36,19 +36,26 @@ public class ShoppingCart implements java.io.Serializable {
 	
 	private String enable;
 	
+	private String address;
+	
+	private String date;
+	
 	private List<ShoppingProduct> shoppingProducts = new ArrayList<ShoppingProduct>(0);
 
 	public ShoppingCart() {
 	}
 
 	public ShoppingCart(Integer carId, Customer customer, Integer items, PaymentMethod paymentMethod,
-			List<ShoppingProduct> shoppingProducts,String enable , Long total) {
+			List<ShoppingProduct> shoppingProducts,
+			String enable , Long total, String address, String date) {
 		this.carId = carId;
 		this.customer = customer;
 		this.paymentMethod = paymentMethod;
 		this.items = items;
 		this.total = total;
 		this.enable = enable;
+		this.address = address;
+		this.date = date;
 		this.shoppingProducts = shoppingProducts;
 	}
 
@@ -108,6 +115,24 @@ public class ShoppingCart implements java.io.Serializable {
 
 	public void setTotal(Long total) {
 		this.total = total;
+	}
+	
+	@Column(name = "address", nullable = false)
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	@Column(name = "date", nullable = false)
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart")

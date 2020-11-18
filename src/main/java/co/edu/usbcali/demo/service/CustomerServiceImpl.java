@@ -8,18 +8,24 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usbcali.demo.domain.Customer;
 import co.edu.usbcali.demo.repository.CustomerRepository;
+import co.edu.usbcali.demo.security.UserApplication;
 
 @Service
 @Scope("singleton")
 public class CustomerServiceImpl implements CustomerService{
+	
+	private final static Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 	
 	@Autowired
 	CustomerRepository customerRepository;
@@ -60,6 +66,15 @@ public class CustomerServiceImpl implements CustomerService{
 		if(customerRepository.existsById(entity.getEmail())) {
 			throw new Exception("El Customer con id:"+entity.getEmail()+" ya existe");
 		}
+		
+		BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
+		
+		UserApplication userApplication=new UserApplication(
+				entity.getEmail(), 
+				bCryptPasswordEncoder.encode(entity.getToken())
+		);
+		
+		entity.setToken(userApplication.getPassword());
 		
 		return customerRepository.save(entity);
 	}
