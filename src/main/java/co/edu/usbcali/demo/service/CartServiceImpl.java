@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService{
 			throw new Exception("El cliente con email: "+email+ " no esta habilitado");
 		}
 		
-		ShoppingCart shoppingCart = new ShoppingCart(0, customer, 0, null, null, "Y", 0L, null, null);
+		ShoppingCart shoppingCart = new ShoppingCart(0, customer, 0, null, null, "Y", 0L, null, null, null);
 
 		
 		shoppingCart = shoppingCartService.save(shoppingCart);

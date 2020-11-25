@@ -64,6 +64,11 @@ public class ShoppingCartDTO {
 	//@Size(min = 5, max = 255)
 	private String date;
 	
+	@NotNull
+	@Size(min = 19, max = 19)
+	@NotEmpty
+	private String cardNumber;
+	
 
 	public ShoppingCartDTO() {
 		super();
@@ -74,7 +79,8 @@ public class ShoppingCartDTO {
 			/*String cusName, String cusPhone,
 			String cusAddress,*/ Integer payId,
 			/*String payName,*/ Integer items,
-			Long total, String enable, String address, String date
+			Long total, String enable, String address, String date,
+			String cardNumber
 			) {
 		super();
 		this.carId = carId;
@@ -89,6 +95,7 @@ public class ShoppingCartDTO {
 		this.enable = enable;
 		this.address = address;
 		this.date = date;
+		this.cardNumber = cardNumber;
 		//this.shoppingProducts = shoppingProducts;
 	}
 	
@@ -195,6 +202,14 @@ public class ShoppingCartDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}	
+	
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
 	
 	
 }

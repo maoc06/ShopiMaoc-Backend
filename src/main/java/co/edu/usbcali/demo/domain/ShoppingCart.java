@@ -40,6 +40,8 @@ public class ShoppingCart implements java.io.Serializable {
 	
 	private String date;
 	
+	private String cardNumber;
+	
 	private List<ShoppingProduct> shoppingProducts = new ArrayList<ShoppingProduct>(0);
 
 	public ShoppingCart() {
@@ -47,7 +49,7 @@ public class ShoppingCart implements java.io.Serializable {
 
 	public ShoppingCart(Integer carId, Customer customer, Integer items, PaymentMethod paymentMethod,
 			List<ShoppingProduct> shoppingProducts,
-			String enable , Long total, String address, String date) {
+			String enable , Long total, String address, String date, String cardNumber) {
 		this.carId = carId;
 		this.customer = customer;
 		this.paymentMethod = paymentMethod;
@@ -56,6 +58,7 @@ public class ShoppingCart implements java.io.Serializable {
 		this.enable = enable;
 		this.address = address;
 		this.date = date;
+		this.cardNumber = cardNumber;
 		this.shoppingProducts = shoppingProducts;
 	}
 
@@ -133,6 +136,16 @@ public class ShoppingCart implements java.io.Serializable {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+
+	@Column(name = "card_number", nullable = false)
+	public String getCardNumber() {
+		return this.cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart")

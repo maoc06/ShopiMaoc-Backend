@@ -8,8 +8,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +23,6 @@ import co.edu.usbcali.demo.security.UserApplication;
 @Scope("singleton")
 public class CustomerServiceImpl implements CustomerService{
 	
-	private final static Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 	
 	@Autowired
 	CustomerRepository customerRepository;
@@ -107,8 +104,13 @@ public class CustomerServiceImpl implements CustomerService{
 			throw new Exception("El customer con id:"+entity.getEmail()+" no existe. No se puede borrar.");
 		}
 		
+		
 		customerRepository.findById(entity.getEmail()).ifPresent(customer -> {
 			if(customer.getShoppingCarts()!=null && customer.getShoppingCarts().isEmpty()==false) {
+				// customer.getShoppingCarts() -> Deshabilitar todos
+				// Despues tendre que cambiar el repositorio que muestra los shops
+				// Para que solo muestre los enable='N' AND items > 0
+				
 				throw new RuntimeException("El customer con id:"+entity.getEmail()+" tiene ShoppingCarts. No se puede borrar.");
 			}
 		});
