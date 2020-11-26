@@ -64,9 +64,9 @@ public class ShoppingCartDTO {
 	//@Size(min = 5, max = 255)
 	private String date;
 	
-	@NotNull
-	@Size(min = 19, max = 19)
-	@NotEmpty
+	//@NotNull
+	@Size(min = 0, max = 19)
+	//@NotEmpty
 	private String cardNumber;
 	
 
