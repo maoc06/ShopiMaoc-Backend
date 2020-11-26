@@ -177,7 +177,7 @@ public class CartServiceImpl implements CartService{
 		Long totalCart = shoppingCart.getTotal() - (product.getPrice() * quantity);
 		
 		shoppingCart.setTotal(totalCart);
-		shoppingCart.setItems(shoppingCart.getItems() - 1);
+		shoppingCart.setItems(shoppingCart.getItems() - quantity);
 		shoppingCartService.update(shoppingCart);
 		
 	}
